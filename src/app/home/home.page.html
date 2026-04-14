@@ -3,6 +3,13 @@
     <ion-title>
       G00474276
     </ion-title>
+
+      <ion-buttons slot="end">
+        <ion-button routerLink="/favourites">
+          <ion-icon name="heart" aria-label="Favorite"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 
@@ -11,11 +18,12 @@
  <ion-item>
     <ion-input [(ngModel)]="newSearch" label="Movie Search" placeholder="Enter Search Here"></ion-input>
   </ion-item>
+
 <ion-button (click)="setKeyword()">Search</ion-button> 
 </div>
 
 <div>
-<ion-card *ngFor="let movie of movies">
+  <ion-card *ngFor="let movie of movies" [routerLink]="['/movie-details']">
 
     <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" />
 
@@ -28,6 +36,10 @@
         {{ movie.release_date }}
       </ion-card-subtitle>
     </ion-card-header>
+    
+    <ion-card-content>
+      {{ movie.overview }}
+    </ion-card-content>
 
   </ion-card>
 </div>

@@ -5,8 +5,11 @@ import { Storage } from '@ionic/storage-angular';
 @Injectable({
   providedIn: 'root',
 })
+
+
 export class Data {
-  
+    apiKey = '1a2b83d61edbd963a29a89ccaa57cec0';
+
     constructor(private storage: Storage, private http: HttpClient){
     this.init();
   }
@@ -20,12 +23,15 @@ export class Data {
   }
 
   async get(key:string){
-    return await this.storage.get('genre');
+    return await this.storage.get(key);
   }
 
-  searchMovies(keyword: string) {
-    const apiKey = '1a2b83d61edbd963a29a89ccaa57cec0'; 
-    return this.http.get(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${keyword}`);
+  searchMovies(keyword: string) { 
+    return this.http.get(`https://api.themoviedb.org/3/search/movie?api_key=${this.apiKey}&query=${keyword}`);
+  }
+
+  getTrending() {
+    return this.http.get(`https://api.themoviedb.org/3/trending/movie/day?api_key=${this.apiKey}`);
   }
 
 }
