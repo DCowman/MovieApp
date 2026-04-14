@@ -7,7 +7,10 @@ import { AppComponent } from './app/app.component';
 import { importProvidersFrom } from '@angular/core';
 import { IonicStorageModule} from '@ionic/storage-angular';
 import { provideHttpClient } from '@angular/common/http';
+import { addIcons } from 'ionicons';
+import { heart } from 'ionicons/icons';
 
+addIcons({ heart });
 
 bootstrapApplication(AppComponent, {
   providers: [
