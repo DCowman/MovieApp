@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonLabel, IonButtons, IonButton, IonIcon } from '@ionic/angular/standalone';
 import { Data } from '../services/data';
+import { RouterModule } from '@angular/router';
 
 import { ActivatedRoute } from '@angular/router';
 
@@ -14,13 +15,16 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./movie-details.page.scss'],
   standalone: true,
   imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonItem, IonLabel,
-     IonIcon, IonButtons, IonButton]
+     IonIcon, IonButtons, IonButton, RouterModule]
 })
 export class MovieDetailsPage implements OnInit {
   movieId: string = '';
   cast: any[] = [];
   crew: any[] = [];
   movie: any;
+
+  isItFavourite: boolean = false;
+
 
 
   constructor(private mds: Data, private route: ActivatedRoute) { }
@@ -31,6 +35,7 @@ export class MovieDetailsPage implements OnInit {
 
       this.showMovieDescription();
       this.showMovieDetails();
+      this.checkFavourite();
   }
 
   showMovieDetails() {
@@ -46,6 +51,39 @@ export class MovieDetailsPage implements OnInit {
       console.log('Movie Description :', res);
       this.movie = res;
   });
+  }
+
+  //Simple check to see if the movie is in favourites
+  async checkFavourite() {
+    let favourites = await this.mds.get('favourites');
+    
+    //Makes sure the array exists. Wont work if favourites is null
+    if (!favourites) {
+      favourites = [];
+    }
+  
+    this.isItFavourite = favourites.includes(this.movieId);
+}
+
+  // if isItFavourite == true, removes the movie from favourites by building a new array using filter(),
+  // keeping only the IDs that arent equal to this.movieId. Else add to favourites. Finally save the new favourites array
+  async toggleFavourite() {
+    let favourites = await this.mds.get('favourites');
+
+    // makes sure the array exists. Wont work if favourites is null
+    if (!favourites) {
+      favourites = [];
+    }
+
+    if (this.isItFavourite) {
+      favourites = favourites.filter((id: string) => id !== this.movieId);
+      this.isItFavourite = false;
+    } else {
+        favourites.push(this.movieId);
+        this.isItFavourite = true;
+      }
+
+    await this.mds.set('favourites', favourites);
   }
 
 

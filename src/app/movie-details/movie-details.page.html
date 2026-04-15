@@ -3,12 +3,10 @@
     <ion-title>Movie Details</ion-title>
 
     <ion-buttons slot="end">
-        <ion-button routerLink="/favourites">
+        <ion-button routerLink="/home">
           <ion-icon name="home" aria-label="Home"></ion-icon>
         </ion-button>
-      </ion-buttons>
-
-      <ion-buttons slot="end">
+      
         <ion-button routerLink="/favourites">
           <ion-icon name="heart" aria-label="Favorite"></ion-icon>
         </ion-button>
@@ -19,30 +17,36 @@
 
 <ion-content [fullscreen]="true">
 
-<div *ngIf="movie">
-  <h2>{{ movie.title }}</h2>
-  <img *ngIf="movie.poster_path" [src]="'https://image.tmdb.org/t/p/w300' + movie.poster_path" />
-  <p>{{ movie.overview }}</p>
-</div>
+  //Button used to add or remove current movie from favourites.
+  //Button text and colour change depending on if the movie is already saved or not.
+  <ion-button (click)="toggleFavourite()" [color]="isItFavourite ? 'danger' : 'primary'">
+    {{ isItFavourite ? 'Remove From Favourites' : 'Add To Favourites' }}
+  </ion-button>
 
-<div>
-  <h3>Cast</h3>
-  <ion-item *ngFor="let person of cast">
-    <img *ngIf="person.profile_path"[src]="'https://image.tmdb.org/t/p/w200' + person.profile_path" />
-    <ion-label>
-      {{ person.name }} - - {{ person.character }}
-    </ion-label>
-  </ion-item>
-</div>
+  <div *ngIf="movie">
+    <h2>{{ movie.title }}</h2>
+    <img *ngIf="movie.poster_path" [src]="'https://image.tmdb.org/t/p/w300' + movie.poster_path" />
+    <p>{{ movie.overview }}</p>
+  </div>
 
-<div>
-  <h3>Crew</h3>
-  <ion-item *ngFor="let person of crew">
-    <img *ngIf="person.profile_path" [src]="'https://image.tmdb.org/t/p/w200' + person.profile_path" />
-    <ion-label>
-      {{person.name }} - - {{person.job}}
-    </ion-label>
-  </ion-item>
-</div>
+  <div>
+    <h3>Cast</h3>
+    <ion-item *ngFor="let person of cast">
+      <img *ngIf="person.profile_path"[src]="'https://image.tmdb.org/t/p/w200' + person.profile_path" />
+      <ion-label>
+        {{ person.name }} - - {{ person.character }}
+      </ion-label>
+    </ion-item>
+  </div>
+
+  <div>
+    <h3>Crew</h3>
+    <ion-item *ngFor="let person of crew">
+      <img *ngIf="person.profile_path" [src]="'https://image.tmdb.org/t/p/w200' + person.profile_path" />
+      <ion-label>
+        {{person.name }} - - {{person.job}}
+      </ion-label>
+    </ion-item>
+  </div>
 
 </ion-content>
