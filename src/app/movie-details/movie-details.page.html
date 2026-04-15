@@ -1,19 +1,48 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>Movie Details</ion-title>
+
+    <ion-buttons slot="end">
+        <ion-button routerLink="/favourites">
+          <ion-icon name="home" aria-label="Home"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+
+      <ion-buttons slot="end">
+        <ion-button routerLink="/favourites">
+          <ion-icon name="heart" aria-label="Favorite"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
 
+<div *ngIf="movie">
+  <h2>{{ movie.title }}</h2>
+  <img *ngIf="movie.poster_path" [src]="'https://image.tmdb.org/t/p/w300' + movie.poster_path" />
+  <p>{{ movie.overview }}</p>
+</div>
+
+<div>
   <h3>Cast</h3>
   <ion-item *ngFor="let person of cast">
-    {{ person.name }} - {{ person.character }}
+    <img *ngIf="person.profile_path"[src]="'https://image.tmdb.org/t/p/w200' + person.profile_path" />
+    <ion-label>
+      {{ person.name }} - - {{ person.character }}
+    </ion-label>
   </ion-item>
+</div>
 
+<div>
   <h3>Crew</h3>
   <ion-item *ngFor="let person of crew">
-    {{person.name }} - {{person.job}}
+    <img *ngIf="person.profile_path" [src]="'https://image.tmdb.org/t/p/w200' + person.profile_path" />
+    <ion-label>
+      {{person.name }} - - {{person.job}}
+    </ion-label>
   </ion-item>
+</div>
 
 </ion-content>

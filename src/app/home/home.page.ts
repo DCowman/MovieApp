@@ -11,7 +11,9 @@ import { CommonModule } from '@angular/common';
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonInput, IonButton, FormsModule, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonButtons, IonIcon, RouterModule, IonCardContent,CommonModule],
+  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonInput, IonButton,
+     FormsModule, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonButtons, 
+     IonIcon, RouterModule, IonCardContent,CommonModule],
   })
 
 export class HomePage {

@@ -9,8 +9,9 @@ import { IonicStorageModule} from '@ionic/storage-angular';
 import { provideHttpClient } from '@angular/common/http';
 import { addIcons } from 'ionicons';
 import { heart } from 'ionicons/icons';
+import { home } from 'ionicons/icons';
 
-addIcons({ heart });
+addIcons({ heart, home });
 
 bootstrapApplication(AppComponent, {
   providers: [

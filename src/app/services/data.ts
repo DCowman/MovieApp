@@ -8,7 +8,7 @@ import { Storage } from '@ionic/storage-angular';
 
 
 export class Data {
-    apiKey = '1a2b83d61edbd963a29a89ccaa57cec0';
+  apiKey = '1a2b83d61edbd963a29a89ccaa57cec0';
 
   constructor(private storage: Storage, private http: HttpClient){
     this.init();
@@ -36,6 +36,10 @@ export class Data {
 
   getMovieCastCrew(id: string) {
     return this.http.get(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${this.apiKey}`);
+  }
+
+  getMovieDescription(id: string) {
+    return this.http.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${this.apiKey}`);
   }
 
 }
