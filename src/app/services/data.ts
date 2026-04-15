@@ -34,4 +34,8 @@ export class Data {
     return this.http.get(`https://api.themoviedb.org/3/trending/movie/day?api_key=${this.apiKey}`);
   }
 
+  getMovieCastCrew(id: string) {
+    return this.http.get(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${this.apiKey}`);
+  }
+
 }

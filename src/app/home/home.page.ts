@@ -35,7 +35,7 @@ export class HomePage {
 
   setKeyword(){
     this.mds.set("keyword", this.newSearch);
-    //display this later
+    //display this later. Maybe remove?
     this.keywordToSearch = this.newSearch;
 
     if (!this.newSearch) {
