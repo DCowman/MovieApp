@@ -26,15 +26,25 @@ export class HomePage {
     this.showTrending();
   }
 
- showTrending() {
-  this.mds.getTrending().subscribe((res: any) => {
-    this.movies = res.results;
+  showTrending() {
+    this.mds.getTrending().subscribe((res: any) => {
+      this.movies = res.results;
   });
 }
 
-  async setKeyword(){
-    await this.mds.set("keyword", this.newSearch);
+
+  setKeyword(){
+    this.mds.set("keyword", this.newSearch);
+    //display this later
     this.keywordToSearch = this.newSearch;
-    //this.router.navigate(['/movies']);
+
+    if (!this.newSearch) {
+      this.showTrending();
+    } else {
+      this.mds.searchMovies(this.newSearch).subscribe((res: any) => {
+      console.log('Search results : ', res);
+      this.movies = res.results;
+    });
+  }
   }
 }

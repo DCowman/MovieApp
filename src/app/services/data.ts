@@ -10,7 +10,7 @@ import { Storage } from '@ionic/storage-angular';
 export class Data {
     apiKey = '1a2b83d61edbd963a29a89ccaa57cec0';
 
-    constructor(private storage: Storage, private http: HttpClient){
+  constructor(private storage: Storage, private http: HttpClient){
     this.init();
   }
 

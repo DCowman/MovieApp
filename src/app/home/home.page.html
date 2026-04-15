@@ -4,6 +4,10 @@
       G00474276
     </ion-title>
 
+    <h3 *ngIf="newSearch">Search Results</h3> 
+    <h3 *ngIf="!newSearch">Today’s Trending Movies</h3>
+
+
       <ion-buttons slot="end">
         <ion-button routerLink="/favourites">
           <ion-icon name="heart" aria-label="Favorite"></ion-icon>
