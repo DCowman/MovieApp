@@ -8,7 +8,6 @@ import { RouterModule } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 
 
-
 @Component({
   selector: 'app-movie-details',
   templateUrl: './movie-details.page.html',
@@ -38,19 +37,18 @@ export class MovieDetailsPage implements OnInit {
       this.checkFavourite();
   }
 
-  showMovieDetails() {
-    this.mds.getMovieCastCrew(this.movieId).subscribe((res: any) => {
+  async showMovieDetails() {
+    let res = await this.mds.getMovieCastCrew(this.movieId);
       console.log('Cast & Crew :', res);
       this.cast = res.cast;
       this.crew = res.crew;
-  });
   }
+  
 
-  showMovieDescription() {
-    this.mds.getMovieDescription(this.movieId).subscribe((res: any) => {
+  async showMovieDescription() {
+    let res = await this.mds.getMovieDescription(this.movieId);
       console.log('Movie Description :', res);
       this.movie = res;
-  });
   }
 
   //Simple check to see if the movie is in favourites

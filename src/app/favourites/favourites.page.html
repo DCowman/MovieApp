@@ -1,13 +1,33 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>Favourites</ion-title>
+
+      <ion-buttons slot="end">
+        <ion-button routerLink="/home">
+          <ion-icon name="home" aria-label="Home"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Favourites</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  
+  <ion-card *ngFor="let movie of movies" [routerLink]="['/movie-details', movie.id]">
+
+    <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" />
+
+    <ion-card-header>
+      <ion-card-title>
+        {{ movie.title }}
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      {{ movie.overview }}
+    </ion-card-content>
+
+  </ion-card>
+
 </ion-content>

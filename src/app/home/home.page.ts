@@ -28,14 +28,14 @@ export class HomePage {
     this.showTrending();
   }
 
-  showTrending() {
-    this.mds.getTrending().subscribe((res: any) => {
-      this.movies = res.results;
-  });
-}
+  async showTrending() {
+    let res = await this.mds.getTrending();
+    this.movies = res.results;
+  }
 
 
-  setKeyword(){
+
+  async setKeyword(){
     this.mds.set("keyword", this.newSearch);
     //display this later. Maybe remove?
     this.keywordToSearch = this.newSearch;
@@ -43,10 +43,8 @@ export class HomePage {
     if (!this.newSearch) {
       this.showTrending();
     } else {
-      this.mds.searchMovies(this.newSearch).subscribe((res: any) => {
-      console.log('Search results : ', res);
-      this.movies = res.results;
-    });
+    let res = await this.mds.searchMovies(this.newSearch);
+    this.movies = res.results;
   }
-  }
+}
 }

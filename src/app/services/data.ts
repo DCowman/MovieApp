@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
+import { MyHttp } from './my-http';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,7 @@ import { Storage } from '@ionic/storage-angular';
 export class Data {
   apiKey = '1a2b83d61edbd963a29a89ccaa57cec0';
 
-  constructor(private storage: Storage, private http: HttpClient){
+  constructor(private storage: Storage, private http: MyHttp){
     this.init();
   }
 
@@ -26,20 +27,20 @@ export class Data {
     return await this.storage.get(key);
   }
 
-  searchMovies(keyword: string) { 
-    return this.http.get(`https://api.themoviedb.org/3/search/movie?api_key=${this.apiKey}&query=${keyword}`);
+  async searchMovies(keyword: string) { 
+    return await this.http.get('https://api.themoviedb.org/3/trending/movie/day', {api_key: this.apiKey, query: keyword});
   }
 
-  getTrending() {
-    return this.http.get(`https://api.themoviedb.org/3/trending/movie/day?api_key=${this.apiKey}`);
+  async getTrending() {
+    return await this.http.get('https://api.themoviedb.org/3/trending/movie/day', { api_key: this.apiKey });
   }
 
-  getMovieCastCrew(id: string) {
-    return this.http.get(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${this.apiKey}`);
+  async getMovieCastCrew(id: string) {
+    return await this.http.get(`https://api.themoviedb.org/3/movie/${id}/credits`, { api_key: this.apiKey });
   }
 
-  getMovieDescription(id: string) {
-    return this.http.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${this.apiKey}`);
+  async getMovieDescription(id: string) {
+    return await this.http.get(`https://api.themoviedb.org/3/movie/${id}`, { api_key: this.apiKey });
   }
 
 }

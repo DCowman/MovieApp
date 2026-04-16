@@ -17,8 +17,8 @@
 
 <ion-content [fullscreen]="true">
 
-  //Button used to add or remove current movie from favourites.
-  //Button text and colour change depending on if the movie is already saved or not.
+  <!--Button used to add or remove current movie from favourites.
+  Button text and colour change depending on if the movie is already saved or not.-->
   <ion-button (click)="toggleFavourite()" [color]="isItFavourite ? 'danger' : 'primary'">
     {{ isItFavourite ? 'Remove From Favourites' : 'Add To Favourites' }}
   </ion-button>
