@@ -7,7 +7,6 @@
     <h3 *ngIf="newSearch">Search Results</h3> 
     <h3 *ngIf="!newSearch">Today’s Trending Movies</h3>
 
-
       <ion-buttons slot="end">
         <ion-button routerLink="/favourites">
           <ion-icon name="heart" aria-label="Favorite"></ion-icon>
@@ -18,16 +17,14 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-<div>
+
  <ion-item>
     <ion-input [(ngModel)]="newSearch" label="Movie Search" placeholder="Enter Search Here"></ion-input>
   </ion-item>
 
 <ion-button (click)="setKeyword()">Search</ion-button> 
-</div>
 
-<div>
-  <ion-card *ngFor="let movie of movies" [routerLink]="['/movie-details', movie.id]">
+  <ion-card *ngFor="let movie of movies">
 
     <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" />
 
@@ -43,8 +40,13 @@
     
     <ion-card-content>
       {{ movie.overview }}
+
+      <ion-button size="small" [routerLink]="['/movie-details', movie.id]">
+        Details
+      </ion-button>
+      
     </ion-card-content>
 
   </ion-card>
-</div>
+
 </ion-content>

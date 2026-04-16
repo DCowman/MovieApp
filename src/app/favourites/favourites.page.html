@@ -26,6 +26,13 @@
 
     <ion-card-content>
       {{ movie.overview }}
+
+      <ion-item lines="none">
+        <ion-button size="small" slot="start" [routerLink]="['/movie-details', movie.id]">
+          DETAILS
+        </ion-button>
+      </ion-item>
+
     </ion-card-content>
 
   </ion-card>

@@ -1,13 +1,60 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>Details</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button routerLink="/home">
+        <ion-icon name="home" aria-label="Home"></ion-icon>
+      </ion-button>
+      
+      <ion-button routerLink="/favourites">
+        <ion-icon name="heart" aria-label="Favorite"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Details</ion-title>
-    </ion-toolbar>
-  </ion-header>
+
+  <ion-card>
+    <ion-card-content>
+      <img *ngIf="person.profile_path" [src]="'https://image.tmdb.org/t/p/w300' + person.profile_path">
+      <ion-text *ngIf="!person.profile_path"> No image </ion-text>
+
+      <ion-card-title>{{ person.name }}</ion-card-title>
+      <ion-text *ngIf="person.birthday"> DOB : {{ person.birthday }} </ion-text>
+      <ion-text *ngIf="person.deathday"> DOD : {{ person.deathday }} </ion-text>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="person.also_known_as?.length">
+    <ion-card-title>Also Known As</ion-card-title>
+    
+    <ion-list>
+      <ion-item *ngFor="let name of person.also_known_as">
+        <ion-label>{{ name }}</ion-label>
+      </ion-item>
+    </ion-list>
+
+  </ion-card>
+
+  <ion-card *ngIf="person.biography">
+    <ion-card-title>Biography</ion-card-title>
+    <ion-card-content> {{ person.biography }} </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Other Movies</ion-card-title>
+    </ion-card-header>
+
+    <ion-list>
+      <ion-item *ngFor="let movie of movies" [routerLink]="['/movie-details', movie.id]">
+        <ion-label>{{ movie.title }}</ion-label>
+      </ion-item>
+    </ion-list>
+
+  </ion-card>
+
 </ion-content>

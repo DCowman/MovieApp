@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 import { MyHttp } from './my-http';
@@ -28,7 +27,7 @@ export class Data {
   }
 
   async searchMovies(keyword: string) { 
-    return await this.http.get('https://api.themoviedb.org/3/trending/movie/day', {api_key: this.apiKey, query: keyword});
+    return await this.http.get('https://api.themoviedb.org/3/search/movie', {api_key: this.apiKey, query: keyword});
   }
 
   async getTrending() {
@@ -42,5 +41,15 @@ export class Data {
   async getMovieDescription(id: string) {
     return await this.http.get(`https://api.themoviedb.org/3/movie/${id}`, { api_key: this.apiKey });
   }
+
+
+  async getPersonsDetails(id: string) {
+    return await this.http.get(`https://api.themoviedb.org/3/person/${id}`,{ api_key: this.apiKey });
+}
+
+  async getPersonsMovies(id: string) {
+    return await this.http.get(`https://api.themoviedb.org/3/person/${id}/movie_credits`, { api_key: this.apiKey });
+}
+
 
 }

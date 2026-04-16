@@ -29,22 +29,24 @@ export class HomePage {
   }
 
   async showTrending() {
-    let res = await this.mds.getTrending();
+    const res = await this.mds.getTrending();
     this.movies = res.results;
   }
 
 
-
+  // Checks if a search string was entered. If empty simply reload trending movies.
+  // Otherwise sends the search keyword to searchMovies and saves the result to the movies array
   async setKeyword(){
-    this.mds.set("keyword", this.newSearch);
-    //display this later. Maybe remove?
-    this.keywordToSearch = this.newSearch;
-
+    console.log("setKeyword called");
+    await this.mds.set("keyword", this.newSearch);
+  
     if (!this.newSearch) {
-      this.showTrending();
+      await this.showTrending();
     } else {
-    let res = await this.mds.searchMovies(this.newSearch);
-    this.movies = res.results;
+        const res: any = await this.mds.searchMovies(this.newSearch);
+        console.log('movies BEFORE:', this.movies);
+        this.movies = res.results; 
+        console.log('movies AFTER:', this.movies)
   }
 }
 }

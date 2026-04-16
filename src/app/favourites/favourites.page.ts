@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonIcon, IonButtons } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonIcon, IonButtons, IonItem } from '@ionic/angular/standalone';
 import { Data } from '../services/data';
 import { RouterModule } from '@angular/router';
 
@@ -12,8 +12,9 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule,
     FormsModule, IonCard, IonCardHeader, IonCardTitle, IonCardContent,
-    RouterModule, IonIcon, IonButtons]
+    RouterModule, IonIcon, IonButtons, IonItem]
 })
+
 export class FavouritesPage implements OnInit {
   movies: any[] = [];
 
@@ -25,7 +26,7 @@ export class FavouritesPage implements OnInit {
   }
 
   // Loads all favourite movies from storage & clears the current movies array to avoid duplication.
-  // Then grabs each movies and adds them to the movies array to display  
+  // Then grabs each movie and adds them to the movies array to display  
   async showFavourites() {
     let favourites = await this.mds.get('favourites');
 
@@ -34,10 +35,11 @@ export class FavouritesPage implements OnInit {
     }
     
     this.movies = [];
+
     for (let i = 0; i < favourites.length; i++) {
-      let res = await this.mds.getMovieDescription(favourites[i]);
+      const res = await this.mds.getMovieDescription(favourites[i]);
       this.movies.push(res);
-      }
+    }
     
   }
 

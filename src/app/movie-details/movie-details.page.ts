@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonLabel, IonButtons, IonButton, IonIcon } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonLabel, IonButtons, IonButton, IonIcon, IonCardTitle, IonCardHeader, IonCard, IonCardContent, IonList } from '@ionic/angular/standalone';
 import { Data } from '../services/data';
 import { RouterModule } from '@angular/router';
 
@@ -14,7 +14,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./movie-details.page.scss'],
   standalone: true,
   imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonItem, IonLabel,
-     IonIcon, IonButtons, IonButton, RouterModule]
+    IonIcon, IonButtons, IonButton, RouterModule, IonCardTitle, IonCardHeader, IonCard, IonCardContent, IonList]
 })
 export class MovieDetailsPage implements OnInit {
   movieId: string = '';
@@ -38,7 +38,7 @@ export class MovieDetailsPage implements OnInit {
   }
 
   async showMovieDetails() {
-    let res = await this.mds.getMovieCastCrew(this.movieId);
+    const res = await this.mds.getMovieCastCrew(this.movieId);
       console.log('Cast & Crew :', res);
       this.cast = res.cast;
       this.crew = res.crew;
@@ -46,7 +46,7 @@ export class MovieDetailsPage implements OnInit {
   
 
   async showMovieDescription() {
-    let res = await this.mds.getMovieDescription(this.movieId);
+    const res = await this.mds.getMovieDescription(this.movieId);
       console.log('Movie Description :', res);
       this.movie = res;
   }
