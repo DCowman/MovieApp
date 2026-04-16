@@ -22,8 +22,12 @@
       <img *ngIf="person.profile_path" [src]="'https://image.tmdb.org/t/p/w300' + person.profile_path">
       <ion-text *ngIf="!person.profile_path"> No image </ion-text>
 
-      <ion-card-title>{{ person.name }}</ion-card-title>
-      <ion-text *ngIf="person.birthday"> DOB : {{ person.birthday }} </ion-text>
+      <ion-card-header>
+        <ion-card-title>{{ person.name }}</ion-card-title>
+      </ion-card-header>
+
+      <ion-text *ngIf="person.place_of_birth"> Place of Birth: {{ person.place_of_birth }} </ion-text><br/>
+      <ion-text *ngIf="person.birthday"> DOB : {{ person.birthday }} </ion-text><br/>
       <ion-text *ngIf="person.deathday"> DOD : {{ person.deathday }} </ion-text>
     </ion-card-content>
   </ion-card>

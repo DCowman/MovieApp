@@ -37,6 +37,8 @@ export class MovieDetailsPage implements OnInit {
       this.checkFavourite();
   }
 
+  // Grabs cast and crew data for the selected movie using the movieId.
+  // response is split into cast and crew arrays for display.
   async showMovieDetails() {
     const res = await this.mds.getMovieCastCrew(this.movieId);
       console.log('Cast & Crew :', res);
@@ -44,7 +46,8 @@ export class MovieDetailsPage implements OnInit {
       this.crew = res.crew;
   }
   
-
+  // Grabs movie details (title, overview, poster, ect.) using the movieId.
+  // response is stored in movie object and used to populate the movie-details page.
   async showMovieDescription() {
     const res = await this.mds.getMovieDescription(this.movieId);
       console.log('Movie Description :', res);
@@ -61,7 +64,7 @@ export class MovieDetailsPage implements OnInit {
     }
   
     this.isItFavourite = favourites.includes(this.movieId);
-}
+  }
 
   // if isItFavourite == true, removes the movie from favourites by building a new array using filter(),
   // keeping only the IDs that arent equal to this.movieId. Else add to favourites. Finally save the new favourites array

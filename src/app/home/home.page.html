@@ -24,7 +24,7 @@
 
 <ion-button (click)="setKeyword()">Search</ion-button> 
 
-  <ion-card *ngFor="let movie of movies">
+  <ion-card *ngFor="let movie of movies"[routerLink]="['/movie-details', movie.id]">
 
     <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" />
 
@@ -40,12 +40,11 @@
     
     <ion-card-content>
       {{ movie.overview }}
-
-      <ion-button size="small" [routerLink]="['/movie-details', movie.id]">
-        Details
-      </ion-button>
-      
     </ion-card-content>
+
+    <ion-button size="small" [routerLink]="['/movie-details', movie.id]">
+      Details
+    </ion-button>
 
   </ion-card>
 

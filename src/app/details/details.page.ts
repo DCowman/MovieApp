@@ -31,10 +31,13 @@ export class DetailsPage implements OnInit {
     this.showMovies();
   }
 
+  // Grabs the info to be displayed about actor/crew using their id.
   async showPerson() {
     this.person = await this.mds.getPersonsDetails(this.id);
   }
 
+  // Grabs all movies the person has worked on, using their id.
+  // The response, either from crew or cast, is assigned to the movies array.
   async showMovies() {
     const res: any = await this.mds.getPersonsMovies(this.id);
     this.movies = res.cast || res.crew;
